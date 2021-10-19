@@ -13,6 +13,8 @@ mySprite.Start()
 */package sprite
 
 import (
+	"image"
+
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 
@@ -612,16 +614,23 @@ func (sprite *Sprite) Draw(surface *ebiten.Image) {
 		options.ColorM.Scale(sprite.Red, sprite.Green, sprite.Blue, sprite.Alpha)
 
 		// Choose current image inside animation
-		//x0 := currentAnimation.CurrentStep * currentAnimation.StepWidth
-		//x1 := x0 + currentAnimation.StepWidth
-		//r := image.Rect(x0, 0, x1, currentAnimation.StepHeight)
+		x0 := currentAnimation.CurrentStep * currentAnimation.StepWidth
+		x1 := x0 + currentAnimation.StepWidth
+		r := image.Rect(x0, 0, x1, currentAnimation.StepHeight)
 		//options.  = &r
+
+		// op := &ebiten.DrawImageOptions{}
+		// op.GeoM.Translate(-float64(frameWidth)/2, -float64(frameHeight)/2)
+		// op.GeoM.Translate(screenWidth/2, screenHeight/2)
+		// i := (g.count / 5) % frameNum
+		// sx, sy := frameOX+i*frameWidth, frameOY
 
 		if sprite.Borders {
 			sprite.DrawBorders(surface, violet)
 		}
 
-		surface.DrawImage(currentAnimation.Image, options)
+		//surface.DrawImage(currentAnimation.Image, options)
+		surface.DrawImage(currentAnimation.Image.SubImage(r).(*ebiten.Image), options)
 
 		sprite.NextStep()
 	}
