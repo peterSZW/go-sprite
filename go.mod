@@ -1,4 +1,4 @@
-module github.com/ryosama/go-sprite
+module github.com/peterSZW/go-sprite
 
 go 1.17
 

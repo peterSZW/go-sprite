@@ -1,11 +1,13 @@
 package main
 
 import (
-	"github.com/hajimehoshi/ebiten"
-	"github.com/hajimehoshi/ebiten/ebitenutil"
-	"github.com/hajimehoshi/ebiten/inpututil"
-	"github.com/ryosama/go-sprite"
+	"github.com/hajimehoshi/ebiten/v2"
+
 	"log"
+
+	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
+	"github.com/hajimehoshi/ebiten/v2/inpututil"
+	"github.com/peterSZW/go-sprite"
 )
 
 const (

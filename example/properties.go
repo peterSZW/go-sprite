@@ -1,9 +1,11 @@
 package main
 
 import (
-	"github.com/hajimehoshi/ebiten"
-	"github.com/ryosama/go-sprite"
+	"github.com/hajimehoshi/ebiten/v2"
+
 	"log"
+
+	"github.com/peterSZW/go-sprite"
 )
 
 const (
