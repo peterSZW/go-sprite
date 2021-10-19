@@ -1,8 +1,8 @@
 package main
 
 import (
-	"github.com/hajimehoshi/ebiten"
-	"github.com/ryosama/go-sprite"
+	"github.com/hajimehoshi/ebiten/v2"
+ 	"github.com/peterSZW/go-sprite"
 	"log"
 )
 
