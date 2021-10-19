@@ -42,7 +42,7 @@ func update(surface *ebiten.Image) error {
 func main() {
 
 	explosion4 = sprite.NewSprite()
-	explosion4.AddAnimation("default", "gfx/explosion3.png", 500, 9, ebiten.FilterDefault)
+	explosion4.AddAnimation("default", "gfx/explosion3.png", 500, 9, ebiten.FilterNearest)
 	explosion4.Position(windowWidth/2, windowHeight/2)
 	explosion4.RunOnce(afterRunOnce)
 

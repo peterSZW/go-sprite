@@ -25,7 +25,7 @@ Quick Start
 import "github.com/ryosama/go-sprite"
 
 mySprite = sprite.NewSprite()
-mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterDefault)
+mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterNearest)
 mySprite.Position(WINDOW_WIDTH/2, WINDOW_HEIGHT/2)
 mySprite.CurrentAnimation = "walk-right"
 mySprite.Speed = 2

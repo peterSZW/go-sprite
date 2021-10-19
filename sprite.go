@@ -5,7 +5,7 @@ Basic Usage :
 import "github.com/ryosama/go-sprite"
 
 mySprite = sprite.NewSprite()
-mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterDefault)
+mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterNearest)
 mySprite.Position(WINDOW_WIDTH/2, WINDOW_HEIGHT/2)
 mySprite.CurrentAnimation = "walk-right"
 mySprite.Speed = 2
@@ -13,12 +13,11 @@ mySprite.Start()
 */package sprite
 
 import (
-	 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
-	
-	"image"
+
 	"image/color"
+	_ "image/png"
 	"log"
 	"math"
 	"time"
@@ -235,7 +234,7 @@ func newAnimation(path string, duration int, steps int, filter ebiten.Filter) *A
 	var err error
 	animation := new(Animation)
 	animation.Path = path
-	animation.Image, _, err = ebitenutil.NewImageFromFile(path, filter)
+	animation.Image, _, err = ebitenutil.NewImageFromFile(path)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -267,11 +266,11 @@ AddAnimation adds an animation to the sprite
 
 "steps" is the number of step for the animation
 
-"filter" is ebiten.FilterDefault or ebiten.FilterNearest  or ebiten.FilterLinear
+"filter" is ebiten.FilterNearest or ebiten.FilterNearest  or ebiten.FilterLinear
 
 Example :
 
-mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterDefault)
+mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterNearest)
 */
 func (sprite *Sprite) AddAnimation(label string, path string, duration int, steps int, filter ebiten.Filter) {
 	sprite.Animations[label] = newAnimation(path, duration, steps, filter)
@@ -613,10 +612,10 @@ func (sprite *Sprite) Draw(surface *ebiten.Image) {
 		options.ColorM.Scale(sprite.Red, sprite.Green, sprite.Blue, sprite.Alpha)
 
 		// Choose current image inside animation
-		x0 := currentAnimation.CurrentStep * currentAnimation.StepWidth
-		x1 := x0 + currentAnimation.StepWidth
-		r := image.Rect(x0, 0, x1, currentAnimation.StepHeight)
-		options.SourceRect = &r
+		//x0 := currentAnimation.CurrentStep * currentAnimation.StepWidth
+		//x1 := x0 + currentAnimation.StepWidth
+		//r := image.Rect(x0, 0, x1, currentAnimation.StepHeight)
+		//options.  = &r
 
 		if sprite.Borders {
 			sprite.DrawBorders(surface, violet)

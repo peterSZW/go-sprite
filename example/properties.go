@@ -41,7 +41,7 @@ func main() {
 	for i := 0; i < len(sprites); i++ {
 		sprites[i] = sprite.NewSprite()
 		sprites[i].CenterCoordonnates = true
-		sprites[i].AddAnimation("default", "gfx/som_girl_stand_down.png", 1, 1, ebiten.FilterDefault)
+		sprites[i].AddAnimation("default", "gfx/som_girl_stand_down.png", 1, 1, ebiten.FilterNearest)
 		sprites[i].Position(windowWidth/4*x, windowHeight/4*y)
 		sprites[i].Start()
 

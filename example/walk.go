@@ -19,6 +19,24 @@ const (
 	girlSpeed    = windowWidth / 160
 )
 
+type Game struct{}
+
+func (g *Game) Update() error {
+	return nil
+}
+
+func (g *Game) Draw(screen *ebiten.Image) {
+
+	update(screen)
+
+}
+
+func (g *Game) Layout(outsideWidth, outsideHeight int) (screenWidth, screenHeight int) {
+
+	return 1024, 768
+
+}
+
 var (
 	girl *sprite.Sprite
 )
@@ -44,9 +62,9 @@ func update(surface *ebiten.Image) error {
 	}
 
 	// frame skip
-	if ebiten.IsDrawingSkipped() {
-		return nil
-	}
+	//if ebiten.IsDrawingSkipped() {
+	//	return nil
+	//}
 
 	// draw sprite
 	girl.Draw(surface)
@@ -61,14 +79,14 @@ func main() {
 
 	// create new sprite and load animations
 	girl = sprite.NewSprite()
-	girl.AddAnimation("stand-right", "gfx/som_girl_stand_right.png", 0, 1, ebiten.FilterDefault)
-	girl.AddAnimation("walk-right", "gfx/som_girl_walk_right.png", 700, 6, ebiten.FilterDefault)
-	girl.AddAnimation("stand-left", "gfx/som_girl_stand_left.png", 0, 1, ebiten.FilterDefault)
-	girl.AddAnimation("walk-left", "gfx/som_girl_walk_left.png", 700, 6, ebiten.FilterDefault)
-	girl.AddAnimation("stand-up", "gfx/som_girl_stand_up.png", 0, 1, ebiten.FilterDefault)
-	girl.AddAnimation("walk-up", "gfx/som_girl_walk_up.png", 500, 4, ebiten.FilterDefault)
-	girl.AddAnimation("stand-down", "gfx/som_girl_stand_down.png", 0, 1, ebiten.FilterDefault)
-	girl.AddAnimation("walk-down", "gfx/som_girl_walk_down.png", 500, 4, ebiten.FilterDefault)
+	girl.AddAnimation("stand-right", "gfx/som_girl_stand_right.png", 0, 1, ebiten.FilterNearest)
+	girl.AddAnimation("walk-right", "gfx/som_girl_walk_right.png", 700, 6, ebiten.FilterNearest)
+	girl.AddAnimation("stand-left", "gfx/som_girl_stand_left.png", 0, 1, ebiten.FilterNearest)
+	girl.AddAnimation("walk-left", "gfx/som_girl_walk_left.png", 700, 6, ebiten.FilterNearest)
+	girl.AddAnimation("stand-up", "gfx/som_girl_stand_up.png", 0, 1, ebiten.FilterNearest)
+	girl.AddAnimation("walk-up", "gfx/som_girl_walk_up.png", 500, 4, ebiten.FilterNearest)
+	girl.AddAnimation("stand-down", "gfx/som_girl_stand_down.png", 0, 1, ebiten.FilterNearest)
+	girl.AddAnimation("walk-down", "gfx/som_girl_walk_down.png", 500, 4, ebiten.FilterNearest)
 
 	// set position and first animation
 	girl.Position(windowWidth/2, windowHeight/2)
@@ -76,7 +94,18 @@ func main() {
 	girl.Start()
 
 	// infinite loop
-	if err := ebiten.Run(update, windowWidth, windowWidth, scale, "Sprite demo"); err != nil {
+	// if err := ebiten.Run(update, windowWidth, windowWidth, scale, "Sprite demo"); err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	ebiten.SetWindowSize(1024, 768)
+	//ebiten.SetWindowSize(512, 384)
+	ebiten.SetWindowTitle("Hello, World!")
+	game := &Game{}
+	//game.SetWindowSize(512, 384)
+	//game.SetWindowSize(1024, 768)
+
+	if err := ebiten.RunGame(game); err != nil {
 		log.Fatal(err)
 	}
 }
