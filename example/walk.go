@@ -87,14 +87,23 @@ func main() {
 
 	// create new sprite and load animations
 	girl = sprite.NewSprite()
-	girl.AddAnimation("stand-right", "gfx/som_girl_stand_right.png", 0, 1, ebiten.FilterNearest)
-	girl.AddAnimation("walk-right", "gfx/som_girl_walk_right.png", 700, 6, ebiten.FilterNearest)
-	girl.AddAnimation("stand-left", "gfx/som_girl_stand_left.png", 0, 1, ebiten.FilterNearest)
-	girl.AddAnimation("walk-left", "gfx/som_girl_walk_left.png", 700, 6, ebiten.FilterNearest)
-	girl.AddAnimation("stand-up", "gfx/som_girl_stand_up.png", 0, 1, ebiten.FilterNearest)
-	girl.AddAnimation("walk-up", "gfx/som_girl_walk_up.png", 500, 4, ebiten.FilterNearest)
-	girl.AddAnimation("stand-down", "gfx/som_girl_stand_down.png", 0, 1, ebiten.FilterNearest)
-	girl.AddAnimation("walk-down", "gfx/som_girl_walk_down.png", 500, 4, ebiten.FilterNearest)
+	// girl.AddAnimation("stand-right", "gfx/som_girl_stand_right.png", 0, 1, ebiten.FilterNearest)
+	// girl.AddAnimation("walk-right", "gfx/som_girl_walk_right.png", 700, 6, ebiten.FilterNearest)
+	// girl.AddAnimation("stand-left", "gfx/som_girl_stand_left.png", 0, 1, ebiten.FilterNearest)
+	// girl.AddAnimation("walk-left", "gfx/som_girl_walk_left.png", 700, 6, ebiten.FilterNearest)
+	// girl.AddAnimation("stand-up", "gfx/som_girl_stand_up.png", 0, 1, ebiten.FilterNearest)
+	// girl.AddAnimation("walk-up", "gfx/som_girl_walk_up.png", 500, 4, ebiten.FilterNearest)
+	// girl.AddAnimation("stand-down", "gfx/som_girl_stand_down.png", 0, 1, ebiten.FilterNearest)
+	// girl.AddAnimation("walk-down", "gfx/som_girl_walk_down.png", 500, 4, ebiten.FilterNearest)
+
+	girl.AddAnimationByte("stand-right", &gfx.SOM_GIRL_STAND_RIGHT, 0, 1, ebiten.FilterNearest)
+	girl.AddAnimationByte("walk-right", &gfx.SOM_GIRL_WALK_RIGHT, 700, 6, ebiten.FilterNearest)
+	girl.AddAnimationByte("stand-left", &gfx.SOM_GIRL_STAND_LEFT, 0, 1, ebiten.FilterNearest)
+	girl.AddAnimationByte("walk-left", &gfx.SOM_GIRL_WALK_LEFT, 700, 6, ebiten.FilterNearest)
+	girl.AddAnimationByte("stand-up", &gfx.SOM_GIRL_STAND_UP, 0, 1, ebiten.FilterNearest)
+	girl.AddAnimationByte("walk-up", &gfx.SOM_GIRL_WALK_UP, 500, 4, ebiten.FilterNearest)
+	girl.AddAnimationByte("stand-down", &gfx.SOM_GIRL_STAND_DOWN, 0, 1, ebiten.FilterNearest)
+	girl.AddAnimationByte("walk-down", &gfx.SOM_GIRL_WALK_DOWN, 500, 4, ebiten.FilterNearest)
 
 	// set position and first animation
 	girl.Position(windowWidth/2, windowHeight/2)
@@ -104,17 +113,18 @@ func main() {
 	explosionDuration := 500
 	// create some explosions
 	explosion1 = sprite.NewSprite()
-	explosion1.AddAnimationByte("default", gfx.EXPLOSION1, explosionDuration, 5, ebiten.FilterNearest)
+	explosion1.AddAnimationByte("default", &gfx.EXPLOSION1, explosionDuration, 5, ebiten.FilterNearest)
 	explosion1.Position(10, windowHeight/3*2)
 	explosion1.Start()
 
 	explosion2 = sprite.NewSprite()
-	explosion2.AddAnimation("default", "gfx/explosion2.png", explosionDuration, 7, ebiten.FilterNearest)
+	explosion2.AddAnimationByte("default", &gfx.EXPLOSION2, explosionDuration, 7, ebiten.FilterNearest)
 	explosion2.Position(windowWidth/2-24, windowHeight/3*2)
 	explosion2.Start()
 
 	explosion3 = sprite.NewSprite()
-	explosion3.AddAnimation("default", "gfx/explosion3.png", explosionDuration, 9, ebiten.FilterNearest)
+	explosion3.AddAnimationByte("default", &gfx.EXPLOSION3, explosionDuration, 9, ebiten.FilterNearest)
+	//explosion3.AddAnimation("default", "gfx/explosion3.png", explosionDuration, 9, ebiten.FilterNearest)
 	explosion3.Position(windowWidth-10-48, windowHeight/3*2)
 	explosion3.Start()
 
