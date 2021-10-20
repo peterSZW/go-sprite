@@ -11,7 +11,6 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/peterSZW/go-sprite"
 	"github.com/peterSZW/go-sprite/example/gfx"
-	"github.com/peterSZW/go-sprite/gfx"
 )
 
 const (
