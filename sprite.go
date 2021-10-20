@@ -13,6 +13,7 @@ mySprite.Start()
 */package sprite
 
 import (
+	"bytes"
 	"image"
 
 	"github.com/hajimehoshi/ebiten/v2"
@@ -237,9 +238,40 @@ func newAnimation(path string, duration int, steps int, filter ebiten.Filter) *A
 	animation := new(Animation)
 	animation.Path = path
 	animation.Image, _, err = ebitenutil.NewImageFromFile(path)
+
 	if err != nil {
 		log.Fatal(err)
 	}
+	animation.Steps = steps
+	animation.Duration = time.Millisecond * time.Duration(duration)
+
+	width, height := animation.Image.Size()
+	animation.StepWidth = width / animation.Steps
+	animation.StepHeight = height
+
+	animation.currentStepTimeStart = time.Now()
+	animation.OneStepDuration = time.Duration(int(animation.Duration) / animation.Steps)
+
+	animation.Effects = make([]*animationEffect, 0)
+
+	return animation
+}
+
+func newAnimationByte(rawImage *[]byte, duration int, steps int, filter ebiten.Filter) *Animation {
+	var err error
+	animation := new(Animation)
+	animation.Path = ""
+
+	//animation.Image, _, err = ebitenutil.NewImageFromFile(path)
+
+	img, _, err := image.Decode(bytes.NewReader(*rawImage))
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	animation.Image = ebiten.NewImageFromImage(img)
+
 	animation.Steps = steps
 	animation.Duration = time.Millisecond * time.Duration(duration)
 
@@ -276,6 +308,10 @@ mySprite.AddAnimation("walk-right",	"walk_right.png", 700, 6, ebiten.FilterNeare
 */
 func (sprite *Sprite) AddAnimation(label string, path string, duration int, steps int, filter ebiten.Filter) {
 	sprite.Animations[label] = newAnimation(path, duration, steps, filter)
+}
+
+func (sprite *Sprite) AddAnimationByte(label string, rawImage *[]byte, duration int, steps int, filter ebiten.Filter) {
+	sprite.Animations[label] = newAnimationByte(rawImage, duration, steps, filter)
 }
 
 /*

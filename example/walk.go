@@ -10,6 +10,8 @@ import (
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
 	"github.com/peterSZW/go-sprite"
+	"github.com/peterSZW/go-sprite/example/gfx"
+	"github.com/peterSZW/go-sprite/gfx"
 )
 
 const (
@@ -103,7 +105,7 @@ func main() {
 	explosionDuration := 500
 	// create some explosions
 	explosion1 = sprite.NewSprite()
-	explosion1.AddAnimation("default", "gfx/explosion1.png", explosionDuration, 5, ebiten.FilterNearest)
+	explosion1.AddAnimationByte("default", gfx.EXPLOSION1, explosionDuration, 5, ebiten.FilterNearest)
 	explosion1.Position(10, windowHeight/3*2)
 	explosion1.Start()
 
